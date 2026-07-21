@@ -227,11 +227,11 @@
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 200px;
     gap: 1rem;
   }
   .ph {
     position: relative; overflow: hidden; border-radius: 18px;
+    aspect-ratio: 3 / 4;
     background: linear-gradient(135deg, var(--nude) 0%, var(--rose) 130%);
     cursor: pointer; transition: transform .5s ease;
   }
@@ -246,8 +246,6 @@
     opacity: 0; transition: opacity .4s ease; pointer-events: none;
   }
   .ph:hover::after { opacity: 1; }
-  .ph.tall  { grid-row: span 2; }
-  .ph.wide  { grid-column: span 2; }
   .gallery-note {
     text-align: center; margin-top: 2.5rem; color: var(--ink-soft);
     font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem;
@@ -339,8 +337,7 @@
   @media (max-width: 560px) {
     .nav-links { display: none; }
     .nav-toggle { display: block; }
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
-    .ph.wide { grid-column: span 2; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     .nav-links.open {
       display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
       background: var(--cream); padding: 1.5rem 5vw; gap: 1.2rem; box-shadow: var(--shadow);
@@ -449,14 +446,14 @@
       <p>Os instantes do 1º encontro Femme Movement — presença, movimento e a beleza de mulheres juntas.</p>
     </div>
     <div class="gallery-grid reveal">
-      <figure class="ph wide" data-label="Roda de abertura" data-src="fotos/encontro-01.jpg"></figure>
-      <figure class="ph tall" data-label="Movimento" data-src="fotos/encontro-02.jpg"></figure>
-      <figure class="ph" data-label="Conexão" data-src="fotos/encontro-03.jpg"></figure>
-      <figure class="ph" data-label="Autocuidado" data-src="fotos/encontro-04.jpg"></figure>
-      <figure class="ph tall" data-label="Partilha" data-src="fotos/encontro-05.jpg"></figure>
-      <figure class="ph" data-label="Presença" data-src="fotos/encontro-06.jpg"></figure>
-      <figure class="ph" data-label="Sororidade" data-src="fotos/encontro-07.jpg"></figure>
-      <figure class="ph wide" data-label="Encerramento" data-src="fotos/encontro-08.jpg"></figure>
+      <figure class="ph" data-label="Energia"><img src="fotos/encontro-01.jpg" alt="Energia no 1º encontro Femme Movement" loading="lazy" /></figure>
+      <figure class="ph" data-label="Movimento"><img src="fotos/encontro-02.jpg" alt="Movimento no 1º encontro Femme Movement" loading="lazy" /></figure>
+      <figure class="ph" data-label="Sorriso"><img src="fotos/encontro-03.jpg" alt="Sorriso no 1º encontro Femme Movement" loading="lazy" /></figure>
+      <figure class="ph" data-label="Presença"><img src="fotos/encontro-04.jpg" alt="Presença no 1º encontro Femme Movement" loading="lazy" /></figure>
+      <figure class="ph" data-label="Conexão"><img src="fotos/encontro-05.jpg" alt="Conexão no 1º encontro Femme Movement" loading="lazy" /></figure>
+      <figure class="ph" data-label="Foco"><img src="fotos/encontro-06.jpg" alt="Foco no 1º encontro Femme Movement" loading="lazy" /></figure>
+      <figure class="ph" data-label="Leveza"><img src="fotos/encontro-07.jpg" alt="Leveza no 1º encontro Femme Movement" loading="lazy" /></figure>
+      <figure class="ph" data-label="Juntas"><img src="fotos/encontro-08.jpg" alt="Mulheres juntas no 1º encontro Femme Movement" loading="lazy" /></figure>
     </div>
     <p class="gallery-note">Mais momentos em breve no nosso <a href="https://instagram.com/femmeeclinic" target="_blank" rel="noopener" style="color:var(--rose-deep);">Instagram</a>.</p>
   </div>
@@ -620,16 +617,9 @@
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   document.querySelectorAll('.ph').forEach(fig => {
-    const src = fig.getAttribute('data-src');
-    if (src) {
-      const img = new Image();
-      img.onload = () => { fig.appendChild(img); };
-      img.alt = fig.getAttribute('data-label') || 'Foto do 1º encontro';
-      img.src = src;
-    }
     fig.addEventListener('click', () => {
       const loaded = fig.querySelector('img');
-      if (!loaded) return; // sem foto ainda: não abre o lightbox
+      if (!loaded) return; // sem foto: não abre o lightbox
       lightboxImg.src = loaded.src;
       lightbox.classList.add('open');
     });
