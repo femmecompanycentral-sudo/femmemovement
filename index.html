@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Femme Movement — Bem-estar, movimento e conexão feminina</title>
+<meta name="description" content="Femme Movement: experiências presenciais que integram bem-estar, movimento, autocuidado e autêntica conexão feminina." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --nude:       #e6d3c4;
+    --nude-soft:  #f4ebe3;
+    --rose:       #c39a90;   /* rosado-taupe */
+    --rose-deep:  #9d7166;   /* mauve-marrom (logo) */
+    --mocha:      #4c382e;   /* marrom café das seções escuras */
+    --mocha-soft: #6f5347;
+    --gold:       #bfa079;
+    --cream:      #f9f3ee;
+    --ink:        #43332c;   /* marrom quente */
+    --ink-soft:   #6f5c52;
+    --white:      #fffdfb;
+    --shadow:     0 24px 60px -28px rgba(97, 66, 52, .38);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Jost', sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .serif {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  .eyebrow {
+    font-size: .72rem;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    font-weight: 400;
+  }
+
+  .container { width: min(1140px, 90vw); margin: 0 auto; }
+
+  a { color: inherit; text-decoration: none; }
+
+  .btn {
+    display: inline-block;
+    padding: 1rem 2.4rem;
+    border-radius: 999px;
+    font-size: .8rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    background: var(--rose-deep);
+    color: var(--white);
+    transition: all .35s ease;
+    border: 1px solid var(--rose-deep);
+  }
+  .btn:hover { background: transparent; color: var(--rose-deep); transform: translateY(-2px); }
+  .btn--ghost { background: transparent; color: var(--ink); border-color: var(--nude); }
+  .btn--ghost:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+  /* ---------- NAV ---------- */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    transition: all .4s ease;
+    padding: 1.6rem 0;
+  }
+  header.scrolled {
+    background: rgba(250, 244, 239, .9);
+    backdrop-filter: blur(12px);
+    padding: 1rem 0;
+    box-shadow: 0 1px 0 rgba(201, 138, 134, .15);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .logo span { color: var(--rose-deep); font-style: italic; }
+  .nav-links { display: flex; gap: 2.4rem; align-items: center; }
+  .nav-links a {
+    font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft);
+    transition: color .3s;
+  }
+  .nav-links a:hover { color: var(--rose-deep); }
+  .nav-toggle { display: none; background: none; border: 0; font-size: 1.5rem; color: var(--ink); cursor: pointer; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse at 75% 30%, var(--nude) 0%, transparent 55%),
+      linear-gradient(160deg, var(--cream) 0%, var(--nude-soft) 100%);
+  }
+  .hero::after {
+    content: ""; position: absolute; right: -10%; bottom: -20%;
+    width: 60vw; height: 60vw; max-width: 760px; max-height: 760px;
+    background: radial-gradient(circle, rgba(201,138,134,.28) 0%, transparent 70%);
+    border-radius: 50%; filter: blur(20px);
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: 760px; padding: 8rem 0 4rem; }
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin: 1.4rem 0 1.6rem;
+    color: var(--ink);
+  }
+  .hero h1 em { color: var(--rose-deep); }
+  .hero p {
+    font-size: 1.15rem; max-width: 540px; color: var(--ink-soft); margin-bottom: 2.6rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .scroll-cue {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    font-size: .68rem; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .6rem;
+  }
+  .scroll-cue::after {
+    content: ""; width: 1px; height: 40px; background: var(--rose);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{ opacity:.3; transform: scaleY(.6);} 50%{ opacity:1; transform: scaleY(1);} }
+
+  /* ---------- SECTION base ---------- */
+  section { padding: 7rem 0; }
+  .section-head { max-width: 620px; margin-bottom: 3.5rem; }
+  .section-head h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin: 1rem 0; }
+  .section-head p { color: var(--ink-soft); }
+
+  /* ---------- MANIFESTO ---------- */
+  .manifesto { background: var(--white); text-align: center; }
+  .manifesto .container { max-width: 860px; }
+  .manifesto p.lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    font-style: italic; font-weight: 300; line-height: 1.45; color: var(--ink);
+  }
+  .manifesto p.lead strong { color: var(--rose-deep); font-weight: 500; font-style: normal; }
+  .divider { width: 60px; height: 1px; background: var(--gold); margin: 2.5rem auto; }
+
+  /* ---------- EXPERIÊNCIAS ---------- */
+  .experiences { background: linear-gradient(180deg, var(--cream), var(--nude-soft)); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; }
+  .card {
+    background: var(--white); border-radius: 22px; padding: 2.6rem 2.2rem;
+    box-shadow: var(--shadow); transition: transform .4s ease;
+    border: 1px solid rgba(201,138,134,.12);
+  }
+  .card:hover { transform: translateY(-8px); }
+  .card .num {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; color: var(--rose);
+    font-style: italic; display: block; margin-bottom: 1rem;
+  }
+  .card h3 { font-size: 1.7rem; margin-bottom: .8rem; }
+  .card p { color: var(--ink-soft); font-size: .98rem; }
+
+  /* ---------- PILARES ---------- */
+  .pillars { background: linear-gradient(160deg, var(--mocha), var(--ink)); color: var(--nude-soft); }
+  .pillars .eyebrow { color: var(--nude); }
+  .pillars .section-head h2 { color: var(--white); }
+  .pillars .section-head p { color: rgba(243,231,223,.7); }
+  .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 2.5rem; }
+  .pillar { border-top: 1px solid rgba(201,138,134,.4); padding-top: 1.5rem; }
+  .pillar h3 { font-size: 1.5rem; color: var(--white); margin-bottom: .6rem; }
+  .pillar p { color: rgba(243,231,223,.7); font-size: .95rem; }
+
+  /* ---------- DEPOIMENTOS ---------- */
+  .testimonials { background: var(--nude-soft); text-align: center; }
+  .quote {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: clamp(1.5rem, 3.4vw, 2.2rem); line-height: 1.5; color: var(--ink);
+    max-width: 820px; margin: 0 auto 1.6rem;
+  }
+  .quote-author { font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; color: var(--rose-deep); }
+  .dots { display: flex; gap: .6rem; justify-content: center; margin-top: 2.6rem; }
+  .dots button {
+    width: 9px; height: 9px; border-radius: 50%; border: 0; background: var(--nude);
+    cursor: pointer; transition: all .3s; padding: 0;
+  }
+  .dots button.active { background: var(--rose-deep); transform: scale(1.3); }
+
+  /* ---------- CTA / CONTATO ---------- */
+  .cta {
+    background:
+      radial-gradient(ellipse at 30% 20%, var(--nude) 0%, transparent 60%),
+      linear-gradient(150deg, var(--cream), var(--nude-soft));
+    text-align: center;
+  }
+  .cta .container { max-width: 640px; }
+  .cta h2 { font-size: clamp(2.4rem, 6vw, 4rem); margin-bottom: 1.2rem; }
+  .cta p { color: var(--ink-soft); margin-bottom: 2.4rem; }
+  .form { display: flex; gap: .8rem; flex-wrap: wrap; justify-content: center; }
+  .form input {
+    flex: 1; min-width: 240px; padding: 1rem 1.4rem; border-radius: 999px;
+    border: 1px solid var(--nude); background: var(--white); font-family: inherit;
+    font-size: .95rem; color: var(--ink); outline: none; transition: border .3s;
+  }
+  .form input:focus { border-color: var(--rose); }
+  .form-note { font-size: .78rem; color: var(--ink-soft); margin-top: 1rem; }
+
+  /* ---------- FOOTER ---------- */
+  footer { background: linear-gradient(160deg, var(--mocha), var(--ink)); color: var(--nude-soft); padding: 4rem 0 2.5rem; text-align: center; }
+  footer .logo { color: var(--white); display: inline-block; margin-bottom: 1.2rem; }
+  .social { display: flex; gap: 1.6rem; justify-content: center; margin: 1.5rem 0; }
+  .social a { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--nude); transition: color .3s; }
+  .social a:hover { color: var(--rose); }
+  .copy { font-size: .76rem; color: rgba(243,231,223,.45); letter-spacing: .08em; margin-top: 1.5rem; }
+
+  /* ---------- GALERIA 1º ENCONTRO ---------- */
+  .gallery { background: var(--white); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+    gap: 1rem;
+  }
+  .ph {
+    position: relative; overflow: hidden; border-radius: 18px;
+    background: linear-gradient(135deg, var(--nude) 0%, var(--rose) 130%);
+    cursor: pointer; transition: transform .5s ease;
+  }
+  .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+  .ph:hover { transform: scale(.98); }
+  .ph:hover img { transform: scale(1.08); }
+  .ph::after {
+    content: attr(data-label);
+    position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 1.1rem;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--white);
+    background: linear-gradient(0deg, rgba(74,58,54,.45) 0%, transparent 55%);
+    opacity: 0; transition: opacity .4s ease; pointer-events: none;
+  }
+  .ph:hover::after { opacity: 1; }
+  .ph.tall  { grid-row: span 2; }
+  .ph.wide  { grid-column: span 2; }
+  .gallery-note {
+    text-align: center; margin-top: 2.5rem; color: var(--ink-soft);
+    font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem;
+  }
+
+  /* lightbox */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 100; display: none;
+    align-items: center; justify-content: center;
+    background: rgba(74,58,54,.85); backdrop-filter: blur(8px); padding: 5vw;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 14px; box-shadow: var(--shadow); }
+  .lightbox-close {
+    position: absolute; top: 1.6rem; right: 2rem; background: none; border: 0;
+    color: var(--cream); font-size: 2.4rem; cursor: pointer; line-height: 1;
+  }
+
+  /* ---------- MODAL DE INSCRIÇÃO ---------- */
+  .modal {
+    position: fixed; inset: 0; z-index: 120; display: none;
+    align-items: flex-start; justify-content: center;
+    background: rgba(60, 44, 36, .55); backdrop-filter: blur(6px);
+    padding: 4vh 1rem; overflow-y: auto;
+  }
+  .modal.open { display: flex; }
+  .modal-box {
+    background: var(--cream); width: min(620px, 100%); border-radius: 24px;
+    box-shadow: var(--shadow); padding: 2.8rem clamp(1.4rem, 4vw, 2.8rem);
+    position: relative; animation: pop .4s cubic-bezier(.16,.84,.44,1);
+  }
+  @keyframes pop { from { opacity: 0; transform: translateY(20px) scale(.98); } to { opacity: 1; transform: none; } }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1.3rem; background: none; border: 0;
+    font-size: 2rem; color: var(--ink-soft); cursor: pointer; line-height: 1;
+  }
+  .modal-box .eyebrow { display: block; margin-bottom: .5rem; }
+  .modal-box h3 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin-bottom: .4rem; }
+  .modal-box .modal-sub { color: var(--ink-soft); font-size: .95rem; margin-bottom: 1.8rem; }
+
+  .field { margin-bottom: 1.15rem; }
+  .field label {
+    display: block; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: .45rem; font-weight: 400;
+  }
+  .field label .req { color: var(--rose-deep); }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: .85rem 1rem; border-radius: 12px; border: 1px solid var(--nude);
+    background: var(--white); font-family: inherit; font-size: .95rem; color: var(--ink);
+    outline: none; transition: border .3s; -webkit-appearance: none; appearance: none;
+  }
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239d7166' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.4rem;
+  }
+  .field textarea { resize: vertical; min-height: 84px; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--rose); }
+  .radio-row { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .radio-row label {
+    flex: 1; min-width: 90px; text-align: center; padding: .7rem .6rem; border-radius: 12px;
+    border: 1px solid var(--nude); background: var(--white); cursor: pointer; margin: 0;
+    letter-spacing: .04em; text-transform: none; font-size: .9rem; color: var(--ink); transition: all .25s;
+  }
+  .radio-row input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .radio-row input:checked + span { color: var(--white); }
+  .radio-row label:has(input:checked) { background: var(--rose-deep); border-color: var(--rose-deep); color: var(--white); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .modal-box .btn { width: 100%; margin-top: .6rem; cursor: pointer; }
+  .modal-status { text-align: center; font-size: .88rem; margin-top: 1rem; color: var(--ink-soft); min-height: 1.2em; }
+  .modal-success { text-align: center; padding: 1rem 0; }
+  .modal-success .tick { font-size: 3rem; }
+  .modal-success h3 { margin: .6rem 0; }
+  .modal-success p { color: var(--ink-soft); }
+  @media (max-width: 520px) { .field-row { grid-template-columns: 1fr; } }
+
+  /* ---------- reveal anim ---------- */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all .9s cubic-bezier(.16,.84,.44,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  /* telas intermediárias: mantém o menu completo, só compacta para caber */
+  @media (max-width: 940px) {
+    .nav-links { gap: 1.3rem; }
+    .nav-links a { font-size: .7rem; letter-spacing: .1em; }
+    .nav-links a.btn { padding: .6rem 1.1rem !important; }
+    .logo { font-size: 1.4rem; }
+  }
+
+  @media (max-width: 560px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    .ph.wide { grid-column: span 2; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--cream); padding: 1.5rem 5vw; gap: 1.2rem; box-shadow: var(--shadow);
+    }
+    section { padding: 5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="container nav">
+    <a href="#top" class="logo">Femme<span> Movement</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#manifesto">Manifesto</a>
+      <a href="#experiencias">Experiências</a>
+      <a href="#pilares">Pilares</a>
+      <a href="#encontro">1º Encontro</a>
+      <a href="#vozes">Vozes</a>
+      <a href="#" class="btn" style="padding:.7rem 1.6rem;" data-open-form>Participar</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="container hero-inner">
+    <span class="eyebrow">Bem-estar · Movimento · Conexão</span>
+    <h1>Encontre-se em <em>movimento</em>.</h1>
+    <p>Experiências presenciais que integram bem-estar, movimento, autocuidado e a autêntica conexão entre mulheres.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn" data-open-form>Quero participar</a>
+      <a href="#manifesto" class="btn btn--ghost">Conhecer o movimento</a>
+    </div>
+  </div>
+  <div class="scroll-cue">Role</div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <div class="container reveal">
+    <span class="eyebrow">O Manifesto</span>
+    <div class="divider"></div>
+    <p class="lead">Acreditamos que o cuidado nasce do <strong>encontro</strong>. Que o corpo em movimento abre espaço para a presença, e que a verdadeira transformação acontece quando mulheres se reúnem — sem máscaras, sem pressa, <strong>inteiras</strong>.</p>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<!-- EXPERIÊNCIAS -->
+<section class="experiences" id="experiencias">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">O que vivemos juntas</span>
+      <h2>Experiências que te acolhem</h2>
+      <p>Cada encontro é desenhado para integrar corpo, mente e comunidade num único ritual de presença.</p>
+    </div>
+    <div class="grid">
+      <article class="card reveal">
+        <span class="num">01</span>
+        <h3>Movimento</h3>
+        <p>Práticas corporais que reconectam você ao próprio ritmo — respiração, alongamento e fluidez, num ambiente seguro e feminino.</p>
+      </article>
+      <article class="card reveal">
+        <span class="num">02</span>
+        <h3>Autocuidado</h3>
+        <p>Rituais de cuidado e estética do bem-estar para nutrir a relação com o seu corpo, com gentileza e intenção.</p>
+      </article>
+      <article class="card reveal">
+        <span class="num">03</span>
+        <h3>Meditação, Respiração &amp; Yoga</h3>
+        <p>Práticas guiadas de meditação, respiração consciente e yoga para acalmar a mente, alongar o corpo e reencontrar o equilíbrio entre presença, força e serenidade.</p>
+      </article>
+      <article class="card reveal">
+        <span class="num">04</span>
+        <h3>Conexão</h3>
+        <p>Círculos de partilha e vivências em grupo onde a escuta, a presença e a sororidade ganham espaço para florescer.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PILARES -->
+<section class="pillars" id="pilares">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Nossos pilares</span>
+      <h2>O que sustenta cada encontro</h2>
+      <p>Quatro princípios que guiam todas as experiências Femme Movement.</p>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar reveal"><h3>Presença</h3><p>Estar inteira no agora — o ponto de partida de toda transformação.</p></div>
+      <div class="pillar reveal"><h3>Cuidado</h3><p>Acolhimento que respeita o tempo e a singularidade de cada mulher.</p></div>
+      <div class="pillar reveal"><h3>Comunidade</h3><p>Caminhar acompanhada. A força que nasce do encontro feminino.</p></div>
+      <div class="pillar reveal"><h3>Autenticidade</h3><p>Espaço para ser quem você é, sem performance, sem julgamento.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA 1º ENCONTRO -->
+<section class="gallery" id="encontro">
+  <div class="container">
+    <div class="section-head reveal" style="margin-left:auto;margin-right:auto;text-align:center;">
+      <span class="eyebrow">Memórias</span>
+      <h2>Nosso primeiro encontro</h2>
+      <p>Os instantes do 1º encontro Femme Movement — presença, movimento e a beleza de mulheres juntas.</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <figure class="ph wide" data-label="Roda de abertura" data-src="fotos/encontro-01.jpg"></figure>
+      <figure class="ph tall" data-label="Movimento" data-src="fotos/encontro-02.jpg"></figure>
+      <figure class="ph" data-label="Conexão" data-src="fotos/encontro-03.jpg"></figure>
+      <figure class="ph" data-label="Autocuidado" data-src="fotos/encontro-04.jpg"></figure>
+      <figure class="ph tall" data-label="Partilha" data-src="fotos/encontro-05.jpg"></figure>
+      <figure class="ph" data-label="Presença" data-src="fotos/encontro-06.jpg"></figure>
+      <figure class="ph" data-label="Sororidade" data-src="fotos/encontro-07.jpg"></figure>
+      <figure class="ph wide" data-label="Encerramento" data-src="fotos/encontro-08.jpg"></figure>
+    </div>
+    <p class="gallery-note">Mais momentos em breve no nosso <a href="https://instagram.com/femmeeclinic" target="_blank" rel="noopener" style="color:var(--rose-deep);">Instagram</a>.</p>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="testimonials" id="vozes">
+  <div class="container">
+    <span class="eyebrow reveal" style="display:block;text-align:center;margin-bottom:2.5rem;">Vozes do movimento</span>
+    <div id="quotes">
+      <div class="quote-item">
+        <p class="quote">“Saí de um encontro Femme Movement me sentindo mais perto de mim mesma do que estive em anos.”</p>
+        <p class="quote-author">— Marina A.</p>
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="cta" id="contato">
+  <div class="container reveal">
+    <span class="eyebrow">Próximos encontros</span>
+    <h2>Faça parte do movimento</h2>
+    <p>Preencha sua inscrição e garanta sua vaga nas próximas experiências presenciais. As vagas são limitadas.</p>
+    <button type="button" class="btn" data-open-form>Quero entrar</button>
+    <p class="form-note">Leva menos de 2 minutos. 🤎</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <a href="#top" class="logo">Femme<span style="color:var(--rose)"> Movement</span></a>
+    <div class="social">
+      <a href="https://instagram.com/femmeeclinic" target="_blank" rel="noopener">Instagram</a>
+      <a href="#contato">Participar</a>
+      <a href="mailto:contato@femmemovement.com">E-mail</a>
+    </div>
+    <p class="copy">Uma iniciativa Femme Clinic · Estética Avançada 🤎</p>
+    <p class="copy" style="margin-top:.4rem;">© 2026 Femme Movement · Bem-estar, movimento e conexão feminina</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&times;</button>
+  <img src="" alt="Foto do 1º encontro Femme Movement" id="lightboxImg" />
+</div>
+
+<!-- MODAL DE INSCRIÇÃO -->
+<div class="modal" id="signupModal" role="dialog" aria-modal="true" aria-labelledby="signupTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+
+    <div id="formWrapper">
+      <span class="eyebrow">Inscrição</span>
+      <h3 id="signupTitle">Faça parte do movimento</h3>
+      <p class="modal-sub">Conta um pouco sobre você para prepararmos uma experiência à sua altura.</p>
+
+      <form id="signupForm" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-nome">Nome completo <span class="req">*</span></label>
+            <input type="text" id="f-nome" name="Nome" required />
+          </div>
+          <div class="field">
+            <label for="f-whats">WhatsApp <span class="req">*</span></label>
+            <input type="tel" id="f-whats" name="WhatsApp" placeholder="(21) 90000-0000" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-email">E-mail <span class="req">*</span></label>
+          <input type="email" id="f-email" name="E-mail" required />
+        </div>
+
+        <div class="field">
+          <label for="f-conheceu">Como conheceu o FEMME? <span class="req">*</span></label>
+          <select id="f-conheceu" name="Como conheceu" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>Instagram</option>
+            <option>Indicação de uma amiga</option>
+            <option>Femme Clinic</option>
+            <option>Google / busca</option>
+            <option>Outro</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="f-cidade">Cidade / Bairro <span class="req">*</span></label>
+          <input type="text" id="f-cidade" name="Cidade/Bairro" required />
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="f-prof">Profissão</label>
+            <input type="text" id="f-prof" name="Profissão" />
+          </div>
+          <div class="field">
+            <label for="f-idade">Faixa etária <span class="req">*</span></label>
+            <select id="f-idade" name="Faixa etária" required>
+              <option value="" disabled selected>Selecione</option>
+              <option>Até 24 anos</option>
+              <option>25 a 34 anos</option>
+              <option>35 a 44 anos</option>
+              <option>45 a 54 anos</option>
+              <option>55 anos ou mais</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Já pratica atividade física? <span class="req">*</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="Pratica atividade" value="Sim" required /><span>Sim</span></label>
+            <label><input type="radio" name="Pratica atividade" value="Às vezes" /><span>Às vezes</span></label>
+            <label><input type="radio" name="Pratica atividade" value="Não" /><span>Não</span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-objetivo">Principal objetivo <span class="req">*</span></label>
+          <select id="f-objetivo" name="Objetivo principal" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>Emagrecer</option>
+            <option>Autoestima</option>
+            <option>Saúde</option>
+            <option>Socialização</option>
+            <option>Bem-estar geral</option>
+            <option>Outro</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="f-motivou">O que mais motivou sua inscrição?</label>
+          <textarea id="f-motivou" name="Motivação"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="f-espera">O que espera viver no evento?</label>
+          <textarea id="f-espera" name="Expectativa"></textarea>
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">Enviar inscrição</button>
+        <p class="modal-status" id="modalStatus"></p>
+      </form>
+    </div>
+
+    <div class="modal-success" id="successBox" style="display:none;">
+      <div class="tick">🤎</div>
+      <h3>Inscrição recebida!</h3>
+      <p>Obrigada por se inscrever no Femme Movement. Em breve entramos em contato pelo WhatsApp com os detalhes do seu encontro.</p>
+      <button type="button" class="btn" id="successClose" style="width:auto;margin-top:1.5rem;">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // galeria: carrega fotos reais quando existirem; senão mantém o placeholder
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('.ph').forEach(fig => {
+    const src = fig.getAttribute('data-src');
+    if (src) {
+      const img = new Image();
+      img.onload = () => { fig.appendChild(img); };
+      img.alt = fig.getAttribute('data-label') || 'Foto do 1º encontro';
+      img.src = src;
+    }
+    fig.addEventListener('click', () => {
+      const loaded = fig.querySelector('img');
+      if (!loaded) return; // sem foto ainda: não abre o lightbox
+      lightboxImg.src = loaded.src;
+      lightbox.classList.add('open');
+    });
+  });
+  function closeLightbox() { lightbox.classList.remove('open'); lightboxImg.src = ''; }
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  // nav scroll state
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // mobile menu
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // testimonials carousel
+  const quotes = [
+    { t: '“Saí de um encontro Femme Movement me sentindo mais perto de mim mesma do que estive em anos.”', a: '— Marina A.' },
+    { t: '“É raro encontrar um espaço onde se pode simplesmente ser. Aqui, eu me reconheci em outras mulheres.”', a: '— Beatriz L.' },
+    { t: '“O movimento, o silêncio, o acolhimento. Cada detalhe é cuidado. Voltei mais leve e mais inteira.”', a: '— Camila R.' },
+  ];
+  const wrap = document.getElementById('quotes');
+  const dots = document.getElementById('dots');
+  let idx = 0;
+  function render() {
+    wrap.innerHTML = `<div class="quote-item"><p class="quote">${quotes[idx].t}</p><p class="quote-author">${quotes[idx].a}</p></div>`;
+    dots.querySelectorAll('button').forEach((b,i) => b.classList.toggle('active', i === idx));
+  }
+  quotes.forEach((_,i) => {
+    const b = document.createElement('button');
+    b.addEventListener('click', () => { idx = i; render(); });
+    dots.appendChild(b);
+  });
+  render();
+  setInterval(() => { idx = (idx + 1) % quotes.length; render(); }, 6000);
+
+  /* ==========================================================
+     INSCRIÇÃO — modal, envio, backup local e exportação Excel
+     ========================================================== */
+
+  // 1) COLE AQUI a URL do seu app Google Apps Script (veja instruções).
+  //    Enquanto estiver vazio, as inscrições são guardadas apenas neste
+  //    navegador e podem ser exportadas em CSV pelo painel (#admin).
+  const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbw2gyAr6qdXVFiCwB50eJpFNDPRVEStuzPuVvB7CmuVMZJTuk2TOPS50Q_tDNXQxflu/exec";
+
+  const modal = document.getElementById('signupModal');
+  const form = document.getElementById('signupForm');
+  const formWrapper = document.getElementById('formWrapper');
+  const successBox = document.getElementById('successBox');
+  const statusEl = document.getElementById('modalStatus');
+  const submitBtn = document.getElementById('submitBtn');
+  const STORE_KEY = 'femme_inscricoes';
+
+  function openModal() {
+    formWrapper.style.display = '';
+    successBox.style.display = 'none';
+    statusEl.textContent = '';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-open-form]').forEach(el =>
+    el.addEventListener('click', (e) => { e.preventDefault(); openModal(); }));
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('successClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+  // salva no navegador (backup / funciona offline)
+  function saveLocal(record) {
+    let all = [];
+    try { all = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (_) {}
+    all.push(record);
+    localStorage.setItem(STORE_KEY, JSON.stringify(all));
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    data['Data da inscrição'] = new Date().toLocaleString('pt-BR');
+
+    saveLocal(data);                     // backup local sempre
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    statusEl.textContent = '';
+
+    try {
+      if (FORM_ENDPOINT) {
+        await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      }
+      form.reset();
+      formWrapper.style.display = 'none';
+      successBox.style.display = '';
+    } catch (err) {
+      // mesmo com erro de rede, a inscrição ficou salva localmente
+      statusEl.textContent = 'Sua inscrição foi registrada. Se o envio online falhar, entraremos em contato. 🤎';
+      form.reset();
+      formWrapper.style.display = 'none';
+      successBox.style.display = '';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar inscrição';
+    }
+  });
+
+  // -------- Painel de exportação (abra o site com #admin no final da URL) --------
+  function exportCSV() {
+    let all = [];
+    try { all = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (_) {}
+    if (!all.length) { alert('Nenhuma inscrição salva neste navegador ainda.'); return; }
+    const cols = ['Data da inscrição','Nome','WhatsApp','E-mail','Como conheceu','Cidade/Bairro','Profissão','Faixa etária','Pratica atividade','Objetivo principal','Motivação','Expectativa'];
+    const esc = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const sep = ';'; // Excel PT-BR usa ponto e vírgula
+    const rows = [cols.join(sep)];
+    all.forEach(r => rows.push(cols.map(c => esc(r[c])).join(sep)));
+    const csv = '﻿' + rows.join('\r\n'); // BOM p/ acentos no Excel
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'inscricoes-femme-movement.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
+  function showAdmin() {
+    let all = [];
+    try { all = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (_) {}
+    const bar = document.createElement('div');
+    bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:200;background:#43332c;color:#f4ebe3;padding:1rem;display:flex;gap:1rem;align-items:center;justify-content:center;font-size:.9rem;flex-wrap:wrap;';
+    bar.innerHTML = `<span>Painel Femme · <strong>${all.length}</strong> inscrição(ões) neste navegador</span>`;
+    const b1 = document.createElement('button');
+    b1.textContent = 'Baixar Excel (CSV)';
+    b1.className = 'btn'; b1.style.padding = '.6rem 1.4rem';
+    b1.addEventListener('click', exportCSV);
+    bar.appendChild(b1);
+    document.body.appendChild(bar);
+  }
+  if (location.hash === '#admin') showAdmin();
+  window.addEventListener('hashchange', () => { if (location.hash === '#admin') showAdmin(); });
+</script>
+</body>
+</html>
