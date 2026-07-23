@@ -170,6 +170,38 @@
   .card h3 { font-size: 1.7rem; margin-bottom: .8rem; }
   .card p { color: var(--ink-soft); font-size: .98rem; }
 
+  /* ---------- CRONOGRAMA ---------- */
+  .schedule { margin: 4.5rem auto 0; max-width: 680px; }
+  .schedule-head { text-align: center; margin-bottom: 2.2rem; }
+  .schedule-head h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-top: .6rem; }
+  .timeline {
+    background: var(--white); border-radius: 22px; padding: 1rem 2rem;
+    box-shadow: var(--shadow); border: 1px solid rgba(201,138,134,.12);
+  }
+  .slot {
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 1.1rem .4rem; border-bottom: 1px solid rgba(157,113,102,.14);
+  }
+  .slot:last-child { border-bottom: 0; }
+  .slot .time {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.35rem;
+    color: var(--rose-deep); min-width: 128px; text-align: right;
+    font-variant-numeric: tabular-nums; flex-shrink: 0;
+  }
+  .slot .act { font-size: 1.05rem; color: var(--ink); letter-spacing: .02em; }
+  .slot.brk { padding: .55rem .4rem; }
+  .slot.brk .act {
+    font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft);
+  }
+  .slot.surprise .act {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem; color: var(--rose-deep);
+  }
+  @media (max-width: 520px) {
+    .timeline { padding: 1rem 1.2rem; }
+    .slot { gap: .9rem; }
+    .slot .time { min-width: 86px; font-size: 1.1rem; }
+  }
+
   /* ---------- PILARES ---------- */
   .pillars { background: linear-gradient(160deg, var(--mocha), var(--ink)); color: var(--nude-soft); }
   .pillars .eyebrow { color: var(--nude); }
@@ -416,6 +448,28 @@
         <h3>Conexão</h3>
         <p>Círculos de partilha e vivências em grupo onde a escuta, a presença e a sororidade ganham espaço para florescer.</p>
       </article>
+      <article class="card reveal">
+        <span class="num">05</span>
+        <h3>Aula Localizada &amp; Dança</h3>
+        <p>Conduzida por uma personal trainer e criadora de conteúdo para o público feminino, com foco em emagrecimento leve, constância e autoestima — movimento que une energia, ritmo e prazer.</p>
+      </article>
+    </div>
+
+    <!-- CRONOGRAMA -->
+    <div class="schedule reveal">
+      <div class="schedule-head">
+        <span class="eyebrow">Como será o dia</span>
+        <h2>Cronograma do encontro</h2>
+      </div>
+      <div class="timeline">
+        <div class="slot"><span class="time">08h</span><span class="act">Recepção</span></div>
+        <div class="slot"><span class="time">09h – 09h30</span><span class="act">Aula 1</span></div>
+        <div class="slot brk"><span class="time">·</span><span class="act">Intervalo</span></div>
+        <div class="slot"><span class="time">09h45 – 10h15</span><span class="act">Aula 2</span></div>
+        <div class="slot brk"><span class="time">·</span><span class="act">Intervalo</span></div>
+        <div class="slot"><span class="time">10h30 – 11h30</span><span class="act">Aula 3</span></div>
+        <div class="slot surprise"><span class="time">✨</span><span class="act">Surpresa</span></div>
+      </div>
     </div>
   </div>
 </section>
