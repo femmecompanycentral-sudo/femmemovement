@@ -131,10 +131,6 @@
     font-size: .68rem; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft);
     z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .6rem;
   }
-  .scroll-cue::after {
-    content: ""; width: 1px; height: 40px; background: var(--rose);
-    animation: pulse 2s ease-in-out infinite;
-  }
   @keyframes pulse { 0%,100%{ opacity:.3; transform: scaleY(.6);} 50%{ opacity:1; transform: scaleY(1);} }
 
   /* ---------- SECTION base ---------- */
@@ -363,6 +359,41 @@
   .modal-success .tick { font-size: 3rem; }
   .modal-success h3 { margin: .6rem 0; }
   .modal-success p { color: var(--ink-soft); }
+  .modal-success .eyebrow { display: block; margin-bottom: .5rem; }
+  .pay-sub { margin-bottom: 1.3rem; }
+  .pay-sub strong { color: var(--rose-deep); }
+  .pay-amount { margin-bottom: 1.4rem; }
+  .pay-amount span {
+    display: block; font-size: .7rem; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--rose-deep); margin-bottom: .15rem;
+  }
+  .pay-amount strong {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+    font-size: 2.6rem; color: var(--ink);
+  }
+  .pix-qr {
+    width: 210px; height: 210px; display: block; margin: 0 auto 1.3rem;
+    border-radius: 14px; border: 8px solid var(--white); background: var(--white);
+    box-shadow: var(--shadow);
+  }
+  .pix-key-label {
+    font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: .4rem;
+  }
+  .pix-key {
+    background: var(--nude-soft); border: 1px dashed var(--rose); border-radius: 10px;
+    padding: .75rem 1rem; font-size: .95rem; color: var(--ink); word-break: break-all;
+    margin-bottom: 1.3rem;
+  }
+  .pay-actions { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1rem; }
+  .pay-actions .btn { width: 100%; cursor: pointer; }
+  .btn--wa { background: #3f9d6b; border-color: #3f9d6b; }
+  .btn--wa:hover { background: transparent; color: #3f9d6b; border-color: #3f9d6b; }
+  .pay-note { font-size: .8rem; color: var(--ink-soft); margin-bottom: 1rem; }
+  .pay-close {
+    background: none; border: 0; color: var(--ink-soft); text-decoration: underline;
+    cursor: pointer; font-family: inherit; font-size: .85rem;
+  }
   @media (max-width: 520px) { .field-row { grid-template-columns: 1fr; } }
 
   /* ---------- reveal anim ---------- */
@@ -418,7 +449,7 @@
       <a href="#manifesto" class="btn btn--ghost">Conhecer o movimento</a>
     </div>
   </div>
-  <div class="scroll-cue">Role</div>
+  <div class="scroll-cue">Desce</div>
 </section>
 
 <!-- MANIFESTO -->
@@ -452,8 +483,8 @@
       </article>
       <article class="card reveal">
         <span class="num">03</span>
-        <h3>Meditação, Respiração &amp; Yoga</h3>
-        <p>Práticas guiadas de meditação, respiração consciente e yoga para acalmar a mente, alongar o corpo e reencontrar o equilíbrio entre presença, força e serenidade.</p>
+        <h3>Funcional &amp; Dança</h3>
+        <p>Conduzido pela Izabela Leite, co-owner. Personal trainer e criadora de conteúdo para o público feminino, com foco em emagrecimento leve, constância e autoestima. Movimento que une energia, ritmo e prazer.</p>
       </article>
       <article class="card reveal">
         <span class="num">04</span>
@@ -462,8 +493,8 @@
       </article>
       <article class="card reveal">
         <span class="num">05</span>
-        <h3>Funcional &amp; Dança</h3>
-        <p>Conduzido pela Izabela Leite, co-owner. Personal trainer e criadora de conteúdo para o público feminino, com foco em emagrecimento leve, constância e autoestima. Movimento que une energia, ritmo e prazer.</p>
+        <h3>Meditação, Respiração &amp; Yoga</h3>
+        <p>Práticas guiadas de meditação, respiração consciente e yoga para acalmar a mente, alongar o corpo e reencontrar o equilíbrio entre presença, força e serenidade.</p>
       </article>
     </div>
 
@@ -674,10 +705,24 @@
     </div>
 
     <div class="modal-success" id="successBox" style="display:none;">
-      <div class="tick">🤎</div>
-      <h3>Inscrição recebida!</h3>
-      <p>Obrigada por se inscrever no Femme Movement. Em breve entramos em contato pelo WhatsApp com os detalhes do seu encontro.</p>
-      <button type="button" class="btn" id="successClose" style="width:auto;margin-top:1.5rem;">Fechar</button>
+      <span class="eyebrow">Pagamento via Pix</span>
+      <h3>Sua inscrição está quase concluída!</h3>
+      <p class="pay-sub">Faça o pagamento via <strong>Pix</strong> para confirmar sua vaga.</p>
+
+      <div class="pay-amount"><span>1º Lote</span><strong>R$ 50,00</strong></div>
+
+      <img class="pix-qr" src="pix-qr.png" alt="QR Code Pix para pagamento de R$ 50,00" />
+
+      <p class="pix-key-label">Chave Pix (e-mail)</p>
+      <div class="pix-key" id="pixKey">femmecompanycentral@gmail.com</div>
+
+      <div class="pay-actions">
+        <button type="button" class="btn" id="copyPixBtn">Copiar chave Pix</button>
+        <a class="btn btn--wa" id="waBtn" href="https://wa.me/5500000000000?text=Ol%C3%A1%21%20Segue%20o%20comprovante%20da%20minha%20inscri%C3%A7%C3%A3o%20no%20Femme%20Movement." target="_blank" rel="noopener">Enviar comprovante no WhatsApp</a>
+      </div>
+
+      <p class="pay-note">Após pagar, envie o comprovante no WhatsApp para garantir sua vaga. 🤎</p>
+      <button type="button" class="pay-close" id="successClose">Fechar</button>
     </div>
   </div>
 </div>
@@ -771,6 +816,26 @@
     el.addEventListener('click', (e) => { e.preventDefault(); openModal(); }));
   document.getElementById('modalClose').addEventListener('click', closeModal);
   document.getElementById('successClose').addEventListener('click', closeModal);
+
+  // copiar chave Pix
+  const copyPixBtn = document.getElementById('copyPixBtn');
+  if (copyPixBtn) {
+    copyPixBtn.addEventListener('click', async () => {
+      const chave = 'femmecompanycentral@gmail.com';
+      try {
+        await navigator.clipboard.writeText(chave);
+      } catch (_) {
+        const t = document.createElement('textarea');
+        t.value = chave; t.style.position = 'fixed'; t.style.opacity = '0';
+        document.body.appendChild(t); t.focus(); t.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        t.remove();
+      }
+      const original = copyPixBtn.textContent;
+      copyPixBtn.textContent = 'Chave copiada! ✓';
+      setTimeout(() => { copyPixBtn.textContent = original; }, 2200);
+    });
+  }
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
