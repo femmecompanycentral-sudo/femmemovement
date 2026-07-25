@@ -859,13 +859,13 @@
     // monta o link do WhatsApp já com os dados da inscrição da pessoa
     const waNum = '5521978464444';
     const waMsg =
-      'Olá! Concluí minha inscrição no Femme Movement 🤎\n\n' +
+      'Olá! Sua inscrição está quase confirmada no Femme Movement 🤎\n\n' +
       'Nome: ' + (data['Nome'] || '') + '\n' +
       'WhatsApp: ' + (data['WhatsApp'] || '') + '\n' +
       'E-mail: ' + (data['E-mail'] || '') + '\n' +
       'Cidade/Bairro: ' + (data['Cidade/Bairro'] || '') + '\n' +
       'Objetivo: ' + (data['Objetivo principal'] || '') + '\n\n' +
-      'Segue o comprovante do pagamento (1º Lote — R$ 50,00).';
+      'Favor nos envie o comprovante do pagamento (1º Lote — R$ 50,00).';
     const waBtn = document.getElementById('waBtn');
     if (waBtn) waBtn.href = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(waMsg);
 
