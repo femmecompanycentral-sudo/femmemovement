@@ -718,7 +718,7 @@
 
       <div class="pay-actions">
         <button type="button" class="btn" id="copyPixBtn">Copiar chave Pix</button>
-        <a class="btn btn--wa" id="waBtn" href="https://wa.me/5500000000000?text=Ol%C3%A1%21%20Segue%20o%20comprovante%20da%20minha%20inscri%C3%A7%C3%A3o%20no%20Femme%20Movement." target="_blank" rel="noopener">Enviar comprovante no WhatsApp</a>
+        <a class="btn btn--wa" id="waBtn" href="https://wa.me/5521978464444?text=Ol%C3%A1%21%20Segue%20o%20comprovante%20da%20minha%20inscri%C3%A7%C3%A3o%20no%20Femme%20Movement." target="_blank" rel="noopener">Enviar comprovante no WhatsApp</a>
       </div>
 
       <p class="pay-note">Após pagar, envie o comprovante no WhatsApp para garantir sua vaga. 🤎</p>
@@ -855,6 +855,20 @@
     data['Data da inscrição'] = new Date().toLocaleString('pt-BR');
 
     saveLocal(data);                     // backup local sempre
+
+    // monta o link do WhatsApp já com os dados da inscrição da pessoa
+    const waNum = '5521978464444';
+    const waMsg =
+      'Olá! Concluí minha inscrição no Femme Movement 🤎\n\n' +
+      'Nome: ' + (data['Nome'] || '') + '\n' +
+      'WhatsApp: ' + (data['WhatsApp'] || '') + '\n' +
+      'E-mail: ' + (data['E-mail'] || '') + '\n' +
+      'Cidade/Bairro: ' + (data['Cidade/Bairro'] || '') + '\n' +
+      'Objetivo: ' + (data['Objetivo principal'] || '') + '\n\n' +
+      'Segue o comprovante do pagamento (1º Lote — R$ 50,00).';
+    const waBtn = document.getElementById('waBtn');
+    if (waBtn) waBtn.href = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(waMsg);
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Enviando...';
     statusEl.textContent = '';
