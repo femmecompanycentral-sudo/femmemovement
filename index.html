@@ -253,6 +253,23 @@
     font-family: 'Cormorant Garamond', serif; font-style: italic;
     font-size: clamp(2.4rem, 6vw, 3.2rem); color: var(--ink); line-height: 1.1;
   }
+  .price .price-old {
+    display: block; font-size: .95rem; color: var(--ink-soft);
+    text-decoration: line-through; margin-bottom: .45rem;
+  }
+  .pay-old { color: var(--ink-soft); text-decoration: line-through; font-size: 1.4rem; opacity: .7; margin-right: .4rem; }
+
+  /* ---------- CONTADOR REGRESSIVO ---------- */
+  .countdown {
+    display: inline-flex; align-items: baseline; gap: .55rem;
+    background: rgba(157,113,102,.1); border: 1px solid var(--rose);
+    padding: .55rem 1.25rem; border-radius: 999px; margin-bottom: 1.8rem;
+  }
+  .cd-num {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: 1.8rem; color: var(--rose-deep); line-height: 1;
+  }
+  .cd-label { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
 
   /* ---------- FOOTER ---------- */
   footer { background: linear-gradient(160deg, var(--mocha), var(--ink)); color: var(--nude-soft); padding: 4rem 0 2.5rem; text-align: center; }
@@ -444,6 +461,10 @@
     <span class="eyebrow">Bem-estar · Movimento · Conexão</span>
     <h1>Encontre-se em <em>movimento</em>.</h1>
     <p>Experiências presenciais que integram bem-estar, movimento, autocuidado e a autêntica conexão entre mulheres.</p>
+    <div class="countdown" id="countdown">
+      <span class="cd-num" id="cdNum">–</span>
+      <span class="cd-label" id="cdLabel">dias para o encontro · 22/08</span>
+    </div>
     <div class="hero-actions">
       <a href="#" class="btn" data-open-form>Quero participar</a>
       <a href="#manifesto" class="btn btn--ghost">Conhecer o movimento</a>
@@ -577,8 +598,9 @@
     <h2>Faça parte do movimento</h2>
     <p>Preencha sua inscrição e garanta sua vaga nas próximas experiências presenciais. As vagas são limitadas.</p>
     <div class="price">
-      <span class="price-label">1º Lote</span>
-      <span class="price-value">R$ 50</span>
+      <span class="price-old">1º Lote — R$ 50</span>
+      <span class="price-label">2º Lote</span>
+      <span class="price-value">R$ 55</span>
     </div>
     <button type="button" class="btn" data-open-form>Quero entrar</button>
     <p class="form-note">Leva menos de 2 minutos. 🤎</p>
@@ -709,7 +731,7 @@
       <h3>Sua inscrição está quase concluída!</h3>
       <p class="pay-sub">Faça o pagamento via <strong>Pix</strong> para confirmar sua vaga.</p>
 
-      <div class="pay-amount"><span>1º Lote</span><strong>R$ 50,00</strong></div>
+      <div class="pay-amount"><span>2º Lote</span><strong><s class="pay-old">R$ 50</s>R$ 55,00</strong></div>
 
       <img class="pix-qr" src="pix-qr.png" alt="QR Code Pix para pagamento de R$ 50,00" />
 
@@ -865,7 +887,7 @@
       'E-mail: ' + (data['E-mail'] || '') + '\n' +
       'Cidade/Bairro: ' + (data['Cidade/Bairro'] || '') + '\n' +
       'Objetivo: ' + (data['Objetivo principal'] || '') + '\n\n' +
-      'Favor nos envie o comprovante do pagamento (1º Lote — R$ 50,00).';
+      'Favor nos envie o comprovante do pagamento (2º Lote — R$ 55,00).';
     const waBtn = document.getElementById('waBtn');
     if (waBtn) waBtn.href = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(waMsg);
 
@@ -930,6 +952,25 @@
   }
   if (location.hash === '#admin') showAdmin();
   window.addEventListener('hashchange', () => { if (location.hash === '#admin') showAdmin(); });
+
+  // contador regressivo até 22/08
+  (function () {
+    const num = document.getElementById('cdNum');
+    const label = document.getElementById('cdLabel');
+    if (!num) return;
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let target = new Date(now.getFullYear(), 7, 22); // 22 de agosto (mês 7 = agosto)
+    if (today > target) target = new Date(now.getFullYear() + 1, 7, 22);
+    const dias = Math.round((target - today) / 86400000);
+    if (dias <= 0) {
+      num.textContent = 'Hoje';
+      if (label) label.textContent = 'é o dia do encontro! · 22/08';
+    } else {
+      num.textContent = dias;
+      if (label) label.textContent = (dias === 1 ? 'dia' : 'dias') + ' para o encontro · 22/08';
+    }
+  })();
 </script>
 </body>
 </html>
