@@ -882,9 +882,10 @@
     const data = Object.fromEntries(new FormData(form).entries());
     data['Data da inscrição'] = new Date().toLocaleString('pt-BR');
 
-    // cupom de desconto: THAIS paga o valor do 1º lote (R$ 50)
+    // cupons de desconto: pagam o valor do 1º lote (R$ 50)
+    const cuponsValidos = ['THAIS', 'ULLY'];
     const cupom = (data['Cupom'] || '').trim().toUpperCase();
-    const cupomValido = cupom === 'THAIS';
+    const cupomValido = cuponsValidos.indexOf(cupom) !== -1;
     const lote = cupomValido ? '1º Lote' : '2º Lote';
     const valorTxt = cupomValido ? 'R$ 50,00' : 'R$ 55,00';
     data['Valor'] = valorTxt;
@@ -894,7 +895,7 @@
     const payValor = document.getElementById('payValor');
     const pixQr = document.getElementById('pixQr');
     if (cupomValido) {
-      if (payLote) payLote.textContent = '1º Lote · Cupom THAIS 🤎';
+      if (payLote) payLote.textContent = '1º Lote · Cupom ' + cupom + ' 🤎';
       if (payValor) payValor.innerHTML = 'R$ 50,00';
       if (pixQr) pixQr.src = 'pix-qr-50.png';
     } else {
