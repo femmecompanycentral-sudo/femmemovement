@@ -953,7 +953,7 @@
     let all = [];
     try { all = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (_) {}
     if (!all.length) { alert('Nenhuma inscrição salva neste navegador ainda.'); return; }
-    const cols = ['Data da inscrição','Nome','WhatsApp','E-mail','Como conheceu','Cidade/Bairro','Profissão','Faixa etária','Pratica atividade','Objetivo principal','Cupom','Valor','Motivação','Expectativa'];
+    const cols = ['Data da inscrição','Nome','WhatsApp','E-mail','Como conheceu','Cidade/Bairro','Profissão','Faixa etária','Pratica atividade','Objetivo principal','Motivação','Expectativa','Cupom','Valor'];
     const esc = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
     const sep = ';'; // Excel PT-BR usa ponto e vírgula
     const rows = [cols.join(sep)];
